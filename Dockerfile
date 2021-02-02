@@ -1,8 +1,9 @@
-FROM python:3.8.0-slim-buster
+FROM python:3.8.0-buster
 
 ADD requirements.txt requirements.txt
 
-RUN apt install -y libpq-dev \
+RUN apt update \
+    && apt install -y libpq-dev \
     && pip install --no-cache-dir -r requirements.txt \
     && pip install --no-cache-dir psycopg2
 
