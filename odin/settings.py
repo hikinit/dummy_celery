@@ -54,12 +54,15 @@ TEMPLATES = [
 WSGI_APPLICATION = "odin.wsgi.application"
 
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if ENV("DATABASE_URL"):
+    DATABASES = {"default": ENV("DATABASE_URL")}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
 
 
 AUTH_PASSWORD_VALIDATORS = [
